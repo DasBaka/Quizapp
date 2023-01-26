@@ -1,6 +1,5 @@
 import {countries} from './countrylist.js';
 createFlagsArray();
-Test();
 
 function createFlagsArray() {
     for (let i = 0; i < countries.length; i++) {
@@ -38,6 +37,7 @@ function shuffleArray(array) {
     return array;
 }
 
+//Merken (generiert alle Flags in div)
 function Test() {
     for (let i = 0; i < countries.length; i++) {
     document.getElementById('test').innerHTML += /*html*/ `

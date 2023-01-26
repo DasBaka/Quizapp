@@ -16,7 +16,29 @@
   </head>
 
   <body>
-    <h1>Test</h1>
-    <div id="test"></div>
+    <div class="offcanvas offcanvas-start show" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
+      <div class="offcanvas-header">
+        <h1 class="color55ace1">
+          <b>Guess the <img class="flagIcon" src="img/favicon.ico" /> ?!</b>
+        </h1>
+        <!--<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>  disabled to test-->
+      </div>
+      <div class="offcanvas-body">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <p class="nav-link color55ace1 active" aria-current="page" href="#">Active</p>
+          </li>
+          <li class="nav-item">
+            <p class="nav-link color55ace1" href="#">Link</p>
+          </li>
+          <li class="nav-item">
+            <p class="nav-link color55ace1" href="#">Link</p>
+          </li>
+          <li class="nav-item">
+            <p class="nav-link color55ace1 disabled">Disabled</p>
+          </li>
+        </ul>
+      </div>
+    </div>
   </body>
 </html>
