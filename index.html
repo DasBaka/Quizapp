@@ -15,29 +15,22 @@
     <link rel="icon" type="image/x-icon" href="img/favicon.ico" />
   </head>
 
-  <body>
-    <div class="offcanvas offcanvas-start show" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
-      <div class="offcanvas-header">
-        <h1 class="color55ace1">
-          <b>Guess the <img class="flagIcon" src="img/favicon.ico" /> ?!</b>
-        </h1>
-        <!--<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>  disabled to test-->
+  <body class="d-flex justify-content-center">
+    <img class="backgroundImage" src="" />
+    <div class="card w-50 pt-3 mt-5 border-primary" style="width: 18rem">
+      <h1 class="px-3 color55ace1">
+        <b>Guess the</b></br>
+        <img class="flagIcon flag-image" src="img/favicon.ico"/>
+      </h1>
+      <div class="card-body">
+        <p class="card-text">Guess the flags as fast as possible!</p>
       </div>
-      <div class="offcanvas-body">
-        <ul class="nav flex-column">
-          <li class="nav-item">
-            <p class="nav-link color55ace1 active" aria-current="page" href="#">Active</p>
-          </li>
-          <li class="nav-item">
-            <p class="nav-link color55ace1" href="#">Link</p>
-          </li>
-          <li class="nav-item">
-            <p class="nav-link color55ace1" href="#">Link</p>
-          </li>
-          <li class="nav-item">
-            <p class="nav-link color55ace1 disabled">Disabled</p>
-          </li>
-        </ul>
+      <div class="d-flex flex-wrap justify-content-center mb-2">
+        <button type="button" class="btn px-5 py-3 mx-2 my-2 btn-primary">Primary</button><button type="button" class="btn px-5 py-3 mx-2 my-2 btn-primary">Primary</button></br>
+        <button type="button" class="btn px-5 py-3 mx-2 my-2 btn-primary">Primary</button><button type="button" class="btn px-5 py-3 mx-2 my-2 btn-primary">Primary</button>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted">Highscore: 0</small>
       </div>
     </div>
   </body>
