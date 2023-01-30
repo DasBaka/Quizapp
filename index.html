@@ -9,29 +9,46 @@
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="font_rubik.css" />
     <link rel="stylesheet" href="style.css" />
-    <script type="module" src="script.js"></script>
+
+    <!--databases & script-->
+    <script src="countrylist.js"></script>
+    <script src="html_templates.js"></script>
+    <script src="script.js"></script>
 
     <title>Guess the Flag!?</title>
     <link rel="icon" type="image/x-icon" href="img/favicon.ico" />
   </head>
 
-  <body class="d-flex justify-content-center">
-    <img class="backgroundImage" src="" />
-    <div class="card w-50 pt-3 mt-5 border-primary" style="width: 18rem">
-      <h1 class="px-3 color55ace1">
-        <b>Guess the</b></br>
-        <img class="flagIcon flag-image" src="img/favicon.ico"/>
-      </h1>
-      <div class="card-body">
-        <p class="card-text">Guess the flags as fast as possible!</p>
+  <body class="noScrollBar" onload="loadTemp(startTemp, 'btnDiv')">
+    <img class="backgroundImage" src="img/b24.jpg" />
+    <main class="d-flex justify-content-center">
+      <nav class="d-flex flex-column flex-shrink-0 p-3 text-white" style="width: 15rem">
+        <h1 class="px-3">
+          <b>GUESS THE</b><br />
+          <img class="flagIcon" src="img/flag-white.ico" />
+        </h1>
+        <h5>
+          <ul class="nav flex-column align-items-left">
+            <li class="nav-item pb-4">&#128818; HIGHSCORE</li>
+            <li class="nav-item pb-4">&#9974; PAUSE</li>
+            <li class="nav-item pb-4">&#8918; BACK</li>
+          </ul>
+        </h5>
+      </nav>
+      <div class="card w-100 pt-3 mt-5 mx-5 border-primary" style="width: 18rem">
+        <div class="align-self-center" id="screen">
+          <img class="flag-image" src="img/favicon.ico" />
+        </div>
+        <div class="card-body">
+          <h3 class="card-text text-center">Guess as fast as possible!</h3>
+        </div>
+        <div class="answerDiv d-flex flex-column flex-wrap align-items-center justify-content-center mb-2" id="btnDiv"></div>
+        <div class="card-footer d-flex justify-content-around">
+          <small class="text-muted w-25 text-center" id="footL">Highscore: 0</small>
+          <small class="text-muted w-25 text-center" id="footM">Question: 0/0</small>
+          <small class="text-muted w-25 text-center" id="footR">Timer: 0</small>
+        </div>
       </div>
-      <div class="d-flex flex-wrap justify-content-center mb-2">
-        <button type="button" class="btn px-5 py-3 mx-2 my-2 btn-primary">Primary</button><button type="button" class="btn px-5 py-3 mx-2 my-2 btn-primary">Primary</button></br>
-        <button type="button" class="btn px-5 py-3 mx-2 my-2 btn-primary">Primary</button><button type="button" class="btn px-5 py-3 mx-2 my-2 btn-primary">Primary</button>
-      </div>
-      <div class="card-footer">
-        <small class="text-muted">Highscore: 0</small>
-      </div>
-    </div>
+    </main>
   </body>
 </html>

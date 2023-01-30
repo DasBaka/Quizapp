@@ -1,4 +1,4 @@
-export const countries = [
+const countries = [
     {flag: "ad.png", name: "Andorra"},
     {flag: "ae.png", name: "United Arab Emirates"},
     {flag: "af.png", name: "Afghanistan"},
