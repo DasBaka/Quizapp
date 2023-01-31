@@ -1,7 +1,7 @@
-//import {countries} from './countrylist.js';
-//import {startTemplate} from './html_templates.js';
 createFlagsArray();
-var currentType = 0;
+var currentType = "flag";
+var currentTypeInvert = "country";
+var currentQuestion = 0;
 
 //implement templates & changing Screen (Div)
 function loadTemp(template, container) {
@@ -18,14 +18,20 @@ function screenChange(template, container) {
         , 250);
 }
 
-function showQuestion(x) {
-   return `<img class="flag-Image" src="flags/${countries[x]["flag"]}" />`;
+function nextQuestion() {
+    screenChange(questionTemplate(countries[currentQuestion][currentType]), 'screen');
+    screenChange(answerTemplate(countries[currentQuestion]["answers"]), 'btnDiv');
+    screenChange("What's the " + currentTypeInvert + " to this " + currentType + "?","questionText");
+}
+
+function hideInnerHTML(container) {
+    document.getElementById(container).innerHTML = "";
 }
 
 //onload
 function createFlagsArray() {
     for (let i = 0; i < countries.length; i++) {
-        countries[i]["answers"] = generateAnswers(countries[i]["name"]);
+        countries[i]["answers"] = generateAnswers(countries[i]["country"]);
     }
     shuffleArray(countries);
     console.log(countries);
@@ -34,15 +40,17 @@ function createFlagsArray() {
 function generateAnswers(country) {
     let answers = [country];
     for(let i = 1; i < 4; i++){
-        let falseAnswer = countries[randomArrayIndex(countries)]["name"];
+        let falseAnswer = countries[randomArrayIndex(countries)]["country"];
         while (answers.includes(falseAnswer)) {
-            falseAnswer = countries[randomArrayIndex(countries)]["name"];
+            falseAnswer = countries[randomArrayIndex(countries)]["country"];
         }
         answers.push(falseAnswer);
     }
     shuffleArray(answers);
     return answers;
 }
+
+function resetAll() {}
 
 //shuffe and randomize
 function randomArrayIndex(array) {
@@ -64,13 +72,15 @@ function shuffleArray(array) {
 function toggleType() {
     let toggle = document.getElementById("typeSetting");
     switch (currentType) {
-        case 0: 
-            toggle.innerHTML = /*html*/`<b>Country -> Flags</b>`
-            currentType += 1;
+        case "flag": 
+            currentTypeInvert = currentType;
+            toggle.innerHTML = /*html*/`<b>Quiz-Type: Country -> Flags</b>`
+            currentType = "country";
             break;
-        case 1: 
-            toggle.innerHTML = /*html*/`<b>Flags -> Country</b>`
-            currentType -= 1;
+        case "country": 
+            currentTypeInvert = currentType;
+            toggle.innerHTML = /*html*/`<b>Quiz-Type: Flags -> Country</b>`
+            currentType = "flag";
             break;
     }
 }
@@ -83,13 +93,19 @@ function getRangeValue() {
 
 //start quiz
 function startQuiz() {
+    screenChange("Get ready...","questionText");
+    screenChange("","btnDiv");
+    countdownTimer();
+}
+
+function countdownTimer() {
     let i = 0;
     var startInterval = setInterval(function(){
         screenChange(countdown[i], 'screen')
         if(i < countdown.length){
             i++} else {
                 clearInterval(startInterval);
-                screenChange(showQuestion(i), 'screen');
+                nextQuestion(i);
             };}
         , 1250);
 }

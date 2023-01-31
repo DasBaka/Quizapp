@@ -1,0 +1,13 @@
+/*more fluid-responsive font-size*/
+@media (min-width: 250px) and (max-width: 2400px) {
+  :root {
+    font-size: calc(0.6875rem + ((1vw - 2.5px) * 0.4186));
+    min-height: 0vw;
+  }
+}
+
+@media (min-width: 2400px) {
+  :root {
+    font-size: 20px;
+  }
+}
