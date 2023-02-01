@@ -20,9 +20,9 @@
     <link rel="icon" type="image/x-icon" href="img/favicon.ico" />
   </head>
 
-  <body class="noScrollBar" onload="loadTemp(startTemp, 'btnDiv')">
+  <body class="noScrollBar d-flex justify-content-center align-items-center" onload="loadTemp(startTemp, 'btnDiv')">
     <img class="backgroundImage" src="img/b24.jpg" />
-    <main class="d-flex justify-content-center">
+    <main class="card d-flex flex-row h-100 w-75 m-5 border-primary">
       <nav class="d-flex flex-column flex-shrink-0 p-3 text-white" style="width: 15rem">
         <h1 class="px-3">
           <b>GUESS THE</b><br />
@@ -36,16 +36,16 @@
           </ul>
         </h5>
       </nav>
-      <div class="card w-100 pt-3 mt-5 mx-5 border-primary" style="width: 18rem">
+      <div class="d-flex flex-column w-100 mt-3 border-primary justify-content-center" style="width: 18rem">
         <div class="align-self-center" id="screen">
-          <img class="flag-image" src="img/favicon.ico" />
+          <img class="flag-image no-border" src="img/favicon.ico" />
         </div>
         <div class="card-body">
           <h3 class="card-text text-center" id="questionText">Guess as fast as possible!</h3>
         </div>
         <div class="answerDiv d-flex flex-column flex-wrap align-items-center justify-content-center mb-2" id="btnDiv"></div>
-        <div class="card-footer d-flex justify-content-around">
-          <small class="text-muted w-25 text-center" id="footL">Highscore: 0</small>
+        <div class="card-footer d-flex justify-content-around w-100">
+          <small class="text-muted w-25 text-center" id="footL">Current Score: 0</small>
           <small class="text-muted w-25 text-center" id="footM">Question: 0/0</small>
           <small class="text-muted w-25 text-center" id="footR">Timer: 0</small>
         </div>

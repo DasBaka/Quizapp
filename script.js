@@ -18,12 +18,6 @@ function screenChange(template, container) {
         , 250);
 }
 
-function nextQuestion() {
-    screenChange(questionTemplate(countries[currentQuestion][currentType]), 'screen');
-    screenChange(answerTemplate(countries[currentQuestion]["answers"]), 'btnDiv');
-    screenChange("What's the " + currentTypeInvert + " to this " + currentType + "?","questionText");
-}
-
 function hideInnerHTML(container) {
     document.getElementById(container).innerHTML = "";
 }
@@ -52,7 +46,7 @@ function generateAnswers(country) {
 
 function resetAll() {}
 
-//shuffe and randomize
+//shuffle and randomize
 function randomArrayIndex(array) {
     let index = Math.floor(Math.random()*array.length);
     return index;
@@ -105,8 +99,74 @@ function countdownTimer() {
         if(i < countdown.length){
             i++} else {
                 clearInterval(startInterval);
-                nextQuestion(i);
+                nextQuestion();
             };}
-        , 1250);
+        , 1000);
 }
 
+//check answer
+function checkAnswer(id) {
+    if (countries[currentQuestion]["country"] == document.getElementById('answer' + id).innerHTML) {
+        rightAnswer(id);
+        prepareNext();
+    } else {
+        wrongAnswer(id);
+        prepareNext()
+    }
+}
+
+function rightAnswer(id) {
+    let answer = document.getElementById('answer' + id);
+    const classes = ["btn-success", "btn-outline-primary", "hover"];
+    classes.forEach(element => {
+        toggleIfRight(answer, element);
+    });
+}
+
+function toggleIfRight(answer, element){
+    if(answer.classList.contains(element)){
+        answer.classList.remove(element);
+    } else {
+        answer.classList.add(element);
+    }        
+}
+
+function wrongAnswer(id) {
+    let answer = document.getElementById('answer' + id);
+    const classes = ["btn-danger", "btn-outline-primary", "hover"];
+    classes.forEach(element => {
+       toggleIfWrong(answer, element);
+    });
+    rightAnswer(countries[currentQuestion]["answers"].indexOf(countries[currentQuestion]["country"]));
+}
+
+function toggleIfWrong(answer, element){
+    if(answer.classList.contains(element)){
+        answer.classList.remove(element);
+    } else {
+        answer.classList.add(element);
+    }      
+}
+
+function disableAll() {
+    for (let i = 0; i < 4; i++) {
+        document.getElementById('answer' + i).disabled = true;
+    }
+}
+
+//next answer
+function nextQuestion() {
+    screenChange(questionTemplate(countries[currentQuestion][currentType]), 'screen');
+    screenChange(answerTemplate(countries[currentQuestion]["answers"]), 'btnDiv');
+    screenChange("What's the " + currentTypeInvert + " to this " + currentType + "?","questionText");
+}
+
+async function prepareNext() {
+    currentQuestion += 1;
+    await wait(2500);
+    nextQuestion();
+}
+
+function wait(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
