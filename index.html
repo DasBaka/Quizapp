@@ -14,6 +14,7 @@
     <!--databases & script-->
     <script src="countrylist.js"></script>
     <script src="html_templates.js"></script>
+    <script src="timer.js"></script>
     <script src="script.js"></script>
 
     <title>Guess the Flag!?</title>
@@ -28,13 +29,13 @@
           <b>GUESS THE</b><br />
           <img class="flagIcon" src="img/flag-white.ico" />
         </h1>
-        <h5>
+        <h4>
           <ul class="nav flex-column align-items-left">
             <li class="nav-item pb-4">&#128818; HIGHSCORE</li>
             <li class="nav-item pb-4">&#9974; PAUSE</li>
             <li class="nav-item pb-4">&#8918; BACK</li>
           </ul>
-        </h5>
+        </h4>
       </nav>
       <div class="d-flex flex-column w-100 mt-3 border-primary justify-content-center" style="width: 18rem">
         <div class="align-self-center" id="screen">
@@ -44,10 +45,16 @@
           <h3 class="card-text text-center" id="questionText">Guess as fast as possible!</h3>
         </div>
         <div class="answerDiv d-flex flex-column flex-wrap align-items-center justify-content-center mb-2" id="btnDiv"></div>
-        <div class="card-footer d-flex justify-content-around w-100">
-          <small class="text-muted w-25 text-center" id="footL">Current Score: 0</small>
-          <small class="text-muted w-25 text-center" id="footM">Question: 0/0</small>
-          <small class="text-muted w-25 text-center" id="footR">Timer: 0</small>
+        <div class="progress mb-1 mx-1" role="progressbar" aria-label="Info striped example" aria-valuemin="0" aria-valuemax="100" id="progressBar">
+          <div class="progress-bar progress-bar-striped bg-info" style="width: 30%"></div>
+        </div>
+        <div class="card-footer d-flex justify-content-around w-100" id="footer">
+          <small class="text-muted w-25 text-center" id="footL"></small>
+          <small class="text-muted d-flex justify-content-between w-25 text-center" id="footR">
+            <div id="footR1"></div>
+            <div id="timeSec"></div>
+            <div id="footR2"></div>
+          </small>
         </div>
       </div>
     </main>
