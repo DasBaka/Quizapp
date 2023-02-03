@@ -1,8 +1,10 @@
 createFlagsArray();
-var currentType = 'flag';
-var currentTypeInvert = 'country';
 var currentQuestion = 0;
 let questionAmount = '';
+var secondsRemaining = 20300;
+var countInterval;
+var timesUp = false;
+let yourScore = 0;
 
 //onload
 function createFlagsArray() {
@@ -26,8 +28,6 @@ function generateAnswers(country) {
   return answers;
 }
 
-function resetAll() {}
-
 //shuffle and randomize
 function randomArrayIndex(array) {
   let index = Math.floor(Math.random() * array.length);
@@ -44,123 +44,70 @@ function shuffleArray(array) {
   return array;
 }
 
-//settings
-function toggleType() {
-  let toggle = document.getElementById('typeSetting');
-  switch (currentType) {
-    case 'flag':
-      currentTypeInvert = currentType;
-      toggle.innerHTML = /*html*/ `<b>Quiz-Type: Country -> Flags</b>`;
-      currentType = 'country';
-      break;
-    case 'country':
-      currentTypeInvert = currentType;
-      toggle.innerHTML = /*html*/ `<b>Quiz-Type: Flags -> Country</b>`;
-      currentType = 'flag';
-      break;
-  }
+//timer
+async function startTimer() {
+  secondsRemaining = 20300;
+  screenChange(timeTemplate, 'footR');
+  screenChange(secondsRemaining, 'timeSec');
+  await wait(50);
+  timerFunction();
 }
 
-function getRangeValue() {
-  let amount = document.getElementById('rangeLabel');
-  let val = document.getElementById('questionAmount').value;
-  amount.innerHTML = `Questions: ` + Number(val);
+function timerFunction() {
+  countInterval = setInterval(function () {
+    secondsRemaining = secondsRemaining - 100;
+    var time = secondsRemaining / 1000;
+    time = time.toFixed(1);
+    document.getElementById('timeSec').innerHTML = time;
+    timeQuery(secondsRemaining, countInterval);
+  }, 100);
 }
 
-//start quiz
-function startQuiz() {
-  screenChange('Get ready...', 'questionText');
-  screenChange('', 'btnDiv');
-  countdownTimer();
-}
-
-function countdownTimer() {
-  let i = 0;
-  var startInterval = setInterval(function () {
-    screenChange(countdown[i], 'screen');
-    if (i < countdown.length) {
-      i++;
-    } else {
-      clearInterval(startInterval);
-      nextQuestion();
+function timeQuery(secondsRemaining, countInterval) {
+  if (secondsRemaining < 0) {
+    document.getElementById('timeSec').innerHTML = (0).toFixed(1);
+    clearInterval(countInterval);
+    timesUp = true;
+    for (let i = 0; i < 4; i++) {
+      checkAnswer(i);
     }
-  }, 1000);
-}
-
-//check answer
-function checkAnswer(id) {
-  if (countries[currentQuestion]['country'] == document.getElementById('answer' + id).innerHTML) {
-    rightAnswer(id);
-  } else {
-    wrongAnswer(id);
-  }
-  prepareNext();
-}
-
-function rightAnswer(id) {
-  let answer = document.getElementById('answer' + id);
-  const classes = ['btn-success', 'btn-outline-primary', 'hover'];
-  classes.forEach((element) => {
-    toggleIfRight(answer, element);
-  });
-}
-
-function toggleIfRight(answer, element) {
-  if (answer.classList.contains(element)) {
-    answer.classList.remove(element);
-  } else {
-    answer.classList.add(element);
+    prepareNext();
   }
 }
 
-function wrongAnswer(id) {
-  let answer = document.getElementById('answer' + id);
-  const classes = ['btn-danger', 'btn-outline-primary', 'hover'];
-  classes.forEach((element) => {
-    toggleIfWrong(answer, element);
-  });
-  if (timesUp == false) {
-    rightAnswer(countries[currentQuestion]['answers'].indexOf(countries[currentQuestion]['country']));
-  }
+function stopTimer() {
+  clearInterval(countInterval);
 }
 
-function toggleIfWrong(answer, element) {
-  if (answer.classList.contains(element)) {
-    answer.classList.remove(element);
-  } else {
-    answer.classList.add(element);
-  }
+//score & progress
+function initializeProgressBar() {
+  screenChange(progressTemplate, 'progressBar');
 }
 
-function disableAll() {
-  for (let i = 0; i < 4; i++) {
-    document.getElementById('answer' + i).disabled = true;
-  }
+function refreshProgressBar() {
+  let percentage = (currentQuestion / questionAmount) * 100 + '%';
+  document.getElementById('progress').style = `width: ${percentage}`;
 }
 
-//next answer
-function nextQuestion() {
-  if (currentQuestion == questionAmount) {
-    console.log('ENDE');
-  } else {
-    screenChange(questionTemplate(countries[currentQuestion][currentType]), 'screen');
-    screenChange(answerTemplate(countries[currentQuestion]['answers']), 'btnDiv');
-    screenChange("What's the " + currentTypeInvert + ' to this ' + currentType + '?', 'questionText');
-    startTimer();
-  }
+function addScore() {
+  let currentScore = document.getElementById('currentScore');
+  let score = Number(document.getElementById('timeSec').innerHTML);
+  score = Number((score * (110 + Number(questionAmount))).toFixed(0));
+  currentScore.innerHTML = Number(currentScore.innerHTML) + score;
+  yourScore = currentScore.innerHTML;
 }
 
-async function prepareNext() {
-  currentQuestion += 1;
-  await wait(2000);
-  nextQuestion();
-  timesUp = false;
+function addSpeedScore() {
+  let currentScore = document.getElementById('currentScore');
+  let score = Number(document.getElementById('timeSec').innerHTML);
+  score = Number((score * 2.25).toFixed(0));
+  currentScore.innerHTML = Number(currentScore.innerHTML) + score;
+  yourScore = currentScore.innerHTML;
 }
 
-function wait(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
-function saveValue() {
-  questionAmount = document.getElementById('questionAmount').value;
+function showEndScreen() {
+  screenChange(`<img class="flag-image no-border" src="img/checkered-flag.png"/>`, 'screen');
+  screenChange(`<p>You've scored: ${yourScore} points!!`, 'questionText');
+  screenChange('', 'footL');
+  screenChange('', 'footR');
 }

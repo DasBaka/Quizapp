@@ -9,9 +9,9 @@ body {
   background-color: #55abe117;
 }
 
-nav {
-  background-color: #55ace1;
-  border-radius: 0.2rem 0 0 0.2rem;
+.card-header,
+.card-footer {
+  background-color: #55abe111;
 }
 
 :root {
@@ -36,14 +36,14 @@ nav {
 #screen,
 #questionText,
 #timeSec,
+#progressBar,
 small {
   transition: opacity 250ms ease-in-out;
 }
 
 .flagIcon {
-  height: 4rem;
-  margin-top: 1rem;
-  margin-bottom: 2rem;
+  height: 2.95rem;
+  padding-bottom: 0.45rem;
   object-fit: contain;
 }
 
@@ -63,8 +63,7 @@ small {
 
 h1 {
   text-align: center;
-  border-bottom: 1px white solid;
-  margin-bottom: 2rem;
+  color: #55ace1;
 }
 
 h3 {
@@ -101,25 +100,6 @@ h3 {
   opacity: 20%;
 }
 
-.nav-item {
-  transition: color 250ms ease-in-out;
-}
-
-.nav-item:hover {
-  cursor: pointer;
-  color: #0c5a8a;
-}
-
-ul {
-  margin-left: 1.25rem;
-}
-
-.nav-icon {
-  height: 2rem;
-  margin-right: 0.5rem;
-  object-fit: contain;
-}
-
 .answerDiv {
   min-height: 22rem;
 }
@@ -142,4 +122,24 @@ ul {
 
 .card-footer {
   height: 2.4rem;
+}
+
+#footR {
+  max-width: 12.5rem;
+}
+
+#footL {
+  max-width: 7.5rem;
+}
+
+.progress {
+  --bs-progress-border-radius: 0;
+}
+
+fieldset {
+  color: #55ace1;
+}
+
+#progressBar {
+  height: 1rem;
 }
