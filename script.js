@@ -46,6 +46,7 @@ function shuffleArray(array) {
 
 //timer
 async function startTimer() {
+  //starts timer
   secondsRemaining = 20300;
   screenChange(timeTemplate, 'footR');
   screenChange(secondsRemaining, 'timeSec');
@@ -64,6 +65,7 @@ function timerFunction() {
 }
 
 function timeQuery(secondsRemaining, countInterval) {
+  //function if time = 0
   if (secondsRemaining < 0) {
     document.getElementById('timeSec').innerHTML = (0).toFixed(1);
     clearInterval(countInterval);
@@ -91,6 +93,7 @@ function refreshProgressBar() {
 }
 
 function addScore() {
+  //adds points to score
   let currentScore = document.getElementById('currentScore');
   let score = Number(document.getElementById('timeSec').innerHTML);
   score = Number((score * (110 + Number(questionAmount))).toFixed(0));
@@ -99,6 +102,7 @@ function addScore() {
 }
 
 function addSpeedScore() {
+  //points for failing based on remaining time
   let currentScore = document.getElementById('currentScore');
   let score = Number(document.getElementById('timeSec').innerHTML);
   score = Number((score * 2.25).toFixed(0));
@@ -116,6 +120,7 @@ function showEndScreen() {
 
 //highscore
 function checkHighscore() {
+  //check for placement
   if (highscore[2]['score'] < yourScore) {
     screenChange(newScoreTemplate, 'btnDiv');
   } else {
@@ -139,6 +144,7 @@ function showHighscore() {
 
 //restart
 function getBackToStart() {
+  //restart game
   screenChange(mainFlag, 'screen');
   screenChange('Guess as fast as possible!', 'questionText');
   screenChange(startTemp, 'btnDiv');

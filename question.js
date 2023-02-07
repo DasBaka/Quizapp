@@ -1,4 +1,4 @@
-//sounds
+//audio
 let AUDIO_BEEP = new Audio('audio/beep.mp3');
 let AUDIO_START = new Audio('audio/start.mp3');
 let AUDIO_SUCCESS = new Audio('audio/success.mp3');
@@ -12,6 +12,7 @@ async function playAudio(audio) {
 
 //settings
 function getRangeValue() {
+  //setting for questionAmount
   let amount = document.getElementById('rangeLabel');
   let val = document.getElementById('questionAmount').value;
   amount.innerHTML = Number(val);
@@ -26,16 +27,13 @@ function startQuiz() {
 }
 
 function countdownTimer() {
+  //countdown before start
   let i = 0;
   var startInterval = setInterval(function () {
     screenChange(countdownTemplate(countdown[i]), 'screen');
     if (i < countdown.length) {
       i++;
-      if (i == 4) {
-        playAudio(AUDIO_START);
-      } else {
-        playAudio(AUDIO_BEEP);
-      }
+      countdownSound(i);
     } else {
       clearInterval(startInterval);
       nextQuestion();
@@ -45,9 +43,21 @@ function countdownTimer() {
   }, 1000);
 }
 
+function countdownSound(i) {
+  if (i == 4) {
+    playAudio(AUDIO_START);
+  } else {
+    playAudio(AUDIO_BEEP);
+  }
+}
+
 //check answer
+function check(id) {
+  return countries[currentQuestion]['country'] == document.getElementById('answer' + id).innerHTML;
+}
+
 function checkAnswer(id) {
-  if (countries[currentQuestion]['country'] == document.getElementById('answer' + id).innerHTML) {
+  if (check(id)) {
     rightAnswer(id);
     addScore();
   } else {
@@ -60,7 +70,7 @@ function checkAnswer(id) {
 }
 
 function checkSound(id) {
-  if (countries[currentQuestion]['country'] == document.getElementById('answer' + id).innerHTML) {
+  if (check(id)) {
     playAudio(AUDIO_SUCCESS);
   } else {
     playAudio(AUDIO_FAIL);
