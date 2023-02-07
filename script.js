@@ -68,6 +68,7 @@ function timeQuery(secondsRemaining, countInterval) {
     document.getElementById('timeSec').innerHTML = (0).toFixed(1);
     clearInterval(countInterval);
     timesUp = true;
+    playAudio(AUDIO_FAIL);
     for (let i = 0; i < 4; i++) {
       checkAnswer(i);
     }
@@ -106,8 +107,42 @@ function addSpeedScore() {
 }
 
 function showEndScreen() {
+  playAudio(AUDIO_END);
   screenChange(`<img class="flag-image no-border" src="img/checkered-flag.png"/>`, 'screen');
   screenChange(`<p>You've scored: ${yourScore} points!!`, 'questionText');
-  screenChange('', 'footL');
-  screenChange('', 'footR');
+  screenChange(`<div id="footL1"></div><div id="currentScore"></div>`, 'footL');
+  screenChange(`<div id="footR1"></div><div id="timeSec"></div><div id="footR2"></div>`, 'footR');
+}
+
+//highscore
+function checkHighscore() {
+  if (highscore[2]['score'] < yourScore) {
+    screenChange(newScoreTemplate, 'btnDiv');
+  } else {
+    screenChange(looseTemplate, 'btnDiv');
+  }
+}
+
+function pushScore() {
+  let yourName = document.getElementById('nameId').value;
+  let newScoreData = { name: yourName, score: yourScore };
+  highscore.push(newScoreData);
+  sortHighscore();
+  highscore.splice(3, 1);
+  saveContent();
+}
+
+function showHighscore() {
+  screenChange(highscoreTemplateInner(), 'screen');
+  screenChange(continueBtn, 'btnDiv');
+}
+
+//restart
+function getBackToStart() {
+  screenChange(mainFlag, 'screen');
+  screenChange('Guess as fast as possible!', 'questionText');
+  screenChange(startTemp, 'btnDiv');
+  currentQuestion = 0;
+  questionAmount = '';
+  yourScore = 0;
 }

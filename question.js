@@ -1,3 +1,15 @@
+//sounds
+let AUDIO_BEEP = new Audio('audio/beep.mp3');
+let AUDIO_START = new Audio('audio/start.mp3');
+let AUDIO_SUCCESS = new Audio('audio/success.mp3');
+let AUDIO_FAIL = new Audio('audio/fail.mp3');
+let AUDIO_END = new Audio('audio/end.mp3');
+
+async function playAudio(audio) {
+  await wait(250);
+  audio.play();
+}
+
 //settings
 function getRangeValue() {
   let amount = document.getElementById('rangeLabel');
@@ -8,6 +20,7 @@ function getRangeValue() {
 //start quiz
 function startQuiz() {
   screenChange('', 'btnDiv');
+  screenChange('', 'screen');
   screenChange('Get ready...', 'questionText');
   countdownTimer();
 }
@@ -15,9 +28,14 @@ function startQuiz() {
 function countdownTimer() {
   let i = 0;
   var startInterval = setInterval(function () {
-    screenChange(countdown[i], 'screen');
+    screenChange(countdownTemplate(countdown[i]), 'screen');
     if (i < countdown.length) {
       i++;
+      if (i == 4) {
+        playAudio(AUDIO_START);
+      } else {
+        playAudio(AUDIO_BEEP);
+      }
     } else {
       clearInterval(startInterval);
       nextQuestion();
@@ -38,6 +56,14 @@ function checkAnswer(id) {
   }
   if (timesUp == false) {
     prepareNext();
+  }
+}
+
+function checkSound(id) {
+  if (countries[currentQuestion]['country'] == document.getElementById('answer' + id).innerHTML) {
+    playAudio(AUDIO_SUCCESS);
+  } else {
+    playAudio(AUDIO_FAIL);
   }
 }
 
@@ -86,6 +112,7 @@ function disableAll() {
 function nextQuestion() {
   if (currentQuestion == questionAmount) {
     showEndScreen();
+    checkHighscore();
   } else {
     screenChange(questionTemplate(countries[currentQuestion]['flag']), 'screen');
     screenChange(answerTemplate(countries[currentQuestion]['answers']), 'btnDiv');
@@ -99,6 +126,7 @@ async function prepareNext() {
   await wait(2000);
   nextQuestion();
   timesUp = false;
+  refreshProgressBar();
 }
 
 function wait(ms) {
