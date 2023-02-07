@@ -20,6 +20,8 @@
   .flag-image {
     max-height: 150px;
     max-width: 95%;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
     height: 12.5rem;
   }
 
@@ -33,6 +35,10 @@
 
   .w-25 {
     width: 50% !important;
+  }
+
+  .w-50 {
+    width: calc(95% - 12rem) !important;
   }
 
   .mx-2 {

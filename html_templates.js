@@ -50,8 +50,8 @@ let scoreTemplate = /*html*/ `
 
 let newScoreTemplate = /*html*/ `
 <h3>You've got a new highscore!</h3>
-<h3>Enter your name: <input class="enterName" maxlength="5" id="nameId" onkeyup="this.value = this.value.toUpperCase();"><button type="button" class="btn continueBtn hovers mx-2 my-2 btn-outline-primary" onclick="pushScore(), sortHighscore(), showHighscore(), screenChange('', 'progressBar')"> > </button></h3>
-`;
+<h3>Enter your name: <input type="text" class="enterName" maxlength="5" id="nameId" onkeyup="this.value = this.value.toUpperCase();"><button type="button" class="btn continueBtn hovers mx-2 my-2 btn-outline-primary" onclick="pushScore(), sortHighscore(), showHighscore(), screenChange('', 'progressBar')"> > </button></h3>
+ `; //on mobile: 'predictive text' ignores maxlength. workaround with 'type=passwort' and 'oninput = changeToTextType'...
 
 let looseTemplate = /*html*/ `
 <button type="button" class="btn continueBtn hovers mx-2 my-2 btn-outline-primary" onclick="showHighscore(), sortHighscore(), screenChange('', 'progressBar')"> > </button></h3>
@@ -59,7 +59,7 @@ let looseTemplate = /*html*/ `
 
 let continueBtn = /*html*/ `<button type="button" class="btn hover px-5 py-3 mx-2 my-2 btn-outline-primary" onclick="getBackToStart()"> Back </button></h3>`;
 
-let mainFlag = /*html*/ `<img class="flag-Image no-border" src="img/favicon.ico" onmouseenter="screenChange(highscoreTemplate(), 'screen')"/>`;
+let mainFlag = /*html*/ `<img class="flag-image no-border" src="img/favicon.ico" onmouseenter="screenChange(highscoreTemplate(), 'screen')"/>`;
 
 function highscoreTemplateInner() {
   return /*html*/ `
