@@ -58,7 +58,6 @@ small {
 }
 
 .no-border {
-  max-height: 250px !important;
   border: none !important;
 }
 
@@ -170,35 +169,4 @@ fieldset {
 
 .list-group-item {
   border: none;
-}
-
-@media (max-width: 900px) {
-  #screen {
-    height: 13rem;
-  }
-
-  .flag-image {
-    max-height: 150px;
-    height: 12.5rem;
-  }
-
-  .w-75 {
-    width: 100% !important;
-  }
-
-  .m-5 {
-    margin: 1rem !important;
-  }
-
-  .w-25 {
-    width: 50% !important;
-  }
-
-  .no-border {
-    max-height: 125px !important;
-  }
-
-  .contentWidth {
-    width: calc(90% - 1.5rem);
-  }
 }

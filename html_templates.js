@@ -1,5 +1,5 @@
 //predefined highscore
-let highscore = [
+var highscore = [
   { name: 'AAAAA', score: 25000 },
   { name: 'BBBBB', score: 5000 },
   { name: 'CCCCC', score: 15000 },
@@ -59,31 +59,34 @@ let looseTemplate = /*html*/ `
 
 let continueBtn = /*html*/ `<button type="button" class="btn hover px-5 py-3 mx-2 my-2 btn-outline-primary" onclick="getBackToStart()"> Back </button></h3>`;
 
-let mainFlag = /*html*/ `<img class="flag-Image no-border" src="img/favicon.ico" onmouseenter="screenChange(highscoreTemplate, 'screen'), loadContent()"/>`;
+let mainFlag = /*html*/ `<img class="flag-Image no-border" src="img/favicon.ico" onmouseenter="screenChange(highscoreTemplate(), 'screen')"/>`;
 
 function highscoreTemplateInner() {
   return /*html*/ `
-<h2 id="highscoreH2">Highscore</h2>
-<ol class="list-group list-group-numbered">
-${generatePlaces()}
-</ol>`;
+  <h2 id="highscoreH2">Highscore</h2>
+  <ol class="list-group list-group-numbered">
+  ${generatePlaces()}
+  </ol>`;
 }
 
 function generatePlaces() {
   let pushedList = '';
+  let name = highscore;
   for (let i = 0; i < highscore.length; i++) {
     pushedList += /*html*/ `<li class='list-group-item d-flex justify-content-between align-items-start'>
         <div class='ms-2 me-auto'>
-          <div class='fw-bold'>${highscore[i]['name']}</div>${highscore[i]['score']} points
+          <div class='fw-bold'>${name[i]['name']}</div>${name[i]['score']} points
         </div>
       </li>`;
   }
   return pushedList;
 }
 
-let highscoreTemplate = /*html*/ ` <div onmouseleave="screenChange(mainFlag, 'screen')">
+function highscoreTemplate() {
+  return /*html*/ ` <div onmouseleave="screenChange(mainFlag, 'screen')">
 ${highscoreTemplateInner()}
 </div>`;
+}
 
 //implement templates & changing Screen (Div)
 function loadTemp(template, container) {

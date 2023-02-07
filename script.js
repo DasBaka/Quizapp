@@ -105,7 +105,7 @@ function addSpeedScore() {
   //points for failing based on remaining time
   let currentScore = document.getElementById('currentScore');
   let score = Number(document.getElementById('timeSec').innerHTML);
-  score = Number((score * 2.25).toFixed(0));
+  score = Number((score * 4.25).toFixed(0));
   currentScore.innerHTML = Number(currentScore.innerHTML) + score;
   yourScore = currentScore.innerHTML;
 }
@@ -121,7 +121,10 @@ function showEndScreen() {
 //highscore
 function checkHighscore() {
   //check for placement
-  if (highscore[2]['score'] < yourScore) {
+  loadContent();
+  if (Number(yourScore) > Number(highscore[2]['score'])) {
+    console.log(highscore[2]['score']);
+    console.log(yourScore);
     screenChange(newScoreTemplate, 'btnDiv');
   } else {
     screenChange(looseTemplate, 'btnDiv');

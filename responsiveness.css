@@ -1,13 +1,46 @@
 /*more fluid-responsive font-size*/
 @media (min-width: 250px) and (max-width: 2400px) {
   :root {
-    font-size: calc(0.6875rem + ((1vw - 2.5px) * 0.4186));
+    font-size: calc(0.625rem + ((1vw - 2.8px) * 0.5495));
     min-height: 0vw;
   }
 }
 
-@media (min-width: 2400px) {
+@media (min-width: 2100px) {
   :root {
     font-size: 20px;
+  }
+}
+
+@media (max-width: 1000px) {
+  #screen {
+    height: 13rem;
+  }
+
+  .flag-image {
+    max-height: 150px;
+    max-width: 95%;
+    height: 12.5rem;
+  }
+
+  .w-75 {
+    width: 100% !important;
+  }
+
+  .m-5 {
+    margin: 1rem !important;
+  }
+
+  .w-25 {
+    width: 50% !important;
+  }
+
+  .mx-2 {
+    margin-left: 0.25rem !important;
+    margin-right: 0.25rem !important;
+  }
+
+  .contentWidth {
+    width: calc(95% - 1.5rem) !important;
   }
 }
